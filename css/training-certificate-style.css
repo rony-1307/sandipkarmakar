@@ -1,0 +1,97 @@
+button.training-certificate {
+    position: relative;
+    background: transparent;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1;
+    letter-spacing: 0.1rem;
+    font-size: 1rem;
+    padding: 1rem;
+    transition: 0.2s;
+    font-size: 10px;
+    font-weight: 600;
+}  
+button.training-certificate:hover {
+  letter-spacing: 0.2rem;
+  padding: 1.1rem;
+  background: var(--clr);
+  color: var(--clr);
+  box-shadow: 0 0 20px var(--clr);
+  animation: box 3s infinite;
+}
+button.training-certificate::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #a3a3a3;
+}
+button.training-certificate
+span {
+  position: relative;
+  z-index: 1;
+}
+button.training-certificate
+i.training-certificate {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+button.training-certificate
+i.training-certificate::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  left: 80%;
+  top: -2px;
+  border: 2px solid var(--clr);
+  background: #a3a3a3;
+  transition: 0.2s;
+}
+button.training-certificate:hover
+i.training-certificate::before {
+  width: 15px;
+  left: 20%;
+  animation: move 3s infinite;
+}
+button.training-certificate
+i.training-certificate::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  left: 20%;
+  bottom: -2px;
+  border: 2px solid var(--clr);
+  background: #a3a3a3;
+  transition: 0.2s;
+}
+button.training-certificate:hover
+i.training-certificate::after {
+  width: 15px;
+  left: 80%;
+  animation: move 3s infinite;
+}
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes box {
+  0% {
+    box-shadow: #27272c;
+  }
+  50% {
+    box-shadow: 0 0 25px var(--clr);
+  }
+  100% {
+    box-shadow: #27272c;
+  }
+}

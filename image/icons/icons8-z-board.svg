@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="647.78021"
+   height="647.78021"
+   id="svg6646"
+   version="1.1"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="Zynq_7000_icon.svg">
+  <defs
+     id="defs6648">
+    <linearGradient
+       id="linearGradient7185">
+      <stop
+         style="stop-color:#444444;stop-opacity:1;"
+         offset="0"
+         id="stop7187" />
+      <stop
+         id="stop7199"
+         offset="0.6765039"
+         style="stop-color:#9e9e9e;stop-opacity:1;" />
+      <stop
+         id="stop7197"
+         offset="0.74303484"
+         style="stop-color:#8c8c8c;stop-opacity:1;" />
+      <stop
+         id="stop7195"
+         offset="0.84677958"
+         style="stop-color:#929292;stop-opacity:1;" />
+      <stop
+         id="stop7193"
+         offset="0.95159727"
+         style="stop-color:#c5c5c5;stop-opacity:1;" />
+      <stop
+         style="stop-color:#d7d7d7;stop-opacity:1;"
+         offset="1"
+         id="stop7189" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient7166">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop7168" />
+      <stop
+         style="stop-color:#161616;stop-opacity:1;"
+         offset="1"
+         id="stop7170" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7166"
+       id="linearGradient7172"
+       x1="700.85596"
+       y1="984.25891"
+       x2="58.191551"
+       y2="347.3497"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-1.5258789e-5,-2.6171874e-6)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.55288753"
+     inkscape:cx="365.86871"
+     inkscape:cy="382.53462"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <sodipodi:guide
+       position="108.09792,553.03471"
+       orientation="1,0"
+       id="guide1201"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata6651">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-60.109893,-344.47208)">
+    <rect
+       style="fill:url(#linearGradient7172);fill-opacity:1;stroke:#1a1a1a;stroke-width:0;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect6656"
+       width="647.78021"
+       height="647.78021"
+       x="60.109894"
+       y="344.47208" />
+    <rect
+       style="fill:#5c5c5c;fill-opacity:1;stroke:#1a1a1a;stroke-width:0;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect7178"
+       width="561.45215"
+       height="15.986677"
+       x="105.83181"
+       y="849.85547" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:66.66666412px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none"
+       x="171.82518"
+       y="453.68707"
+       id="text1199"><tspan
+         sodipodi:role="line"
+         id="tspan1197"
+         x="171.82518"
+         y="453.68707"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Arial;-inkscape-font-specification:'Arial Condensed';fill:#666666;fill-opacity:1">XILINX®</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:93.33333588px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none"
+       x="169.2511"
+       y="550.69482"
+       id="text1199-1"><tspan
+         sodipodi:role="line"
+         id="tspan1197-4"
+         x="169.2511"
+         y="550.69482"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#666666;fill-opacity:1">ZYNQ™</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:46.66666794px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none"
+       x="170.53004"
+       y="636.38342"
+       id="text1199-7"><tspan
+         sodipodi:role="line"
+         id="tspan1197-8"
+         x="170.53004"
+         y="636.38342"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Arial;-inkscape-font-specification:'Arial Condensed';fill:#666666;fill-opacity:1">XC7Z010™</tspan><tspan
+         sodipodi:role="line"
+         x="170.53004"
+         y="694.71674"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Arial;-inkscape-font-specification:'Arial Condensed';fill:#666666;fill-opacity:1"
+         id="tspan1247">CLC400ACX1525</tspan><tspan
+         sodipodi:role="line"
+         x="170.53004"
+         y="753.05011"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Arial;-inkscape-font-specification:'Arial Condensed';fill:#666666;fill-opacity:1"
+         id="tspan1249">D508832CA</tspan><tspan
+         sodipodi:role="line"
+         x="170.53004"
+         y="811.38342"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Arial;-inkscape-font-specification:'Arial Condensed';fill:#666666;fill-opacity:1"
+         id="tspan1251">1Q</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.33333206px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none"
+       x="169.48256"
+       y="917.88287"
+       id="text1199-7-1"><tspan
+         sodipodi:role="line"
+         x="169.48256"
+         y="917.88287"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Arial;-inkscape-font-specification:'Arial Condensed';fill:#666666;fill-opacity:1"
+         id="tspan1251-6">WIKI EDITION</tspan></text>
+  </g>
+</svg>
