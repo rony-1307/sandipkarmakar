@@ -983,39 +983,62 @@ textarea {
 
 
 /* =====================================
-      Back to Top Button
+   Back to Top Button
 ===================================== */
-/*--------------------------------------------------------------
-  # Back to top button
-  --------------------------------------------------------------*/
+.back-to-top,
+.back-to-top:hover,
+.back-to-top:focus,
+.back-to-top:active {
+  text-decoration: none;
+  outline: none;
+}
+
 .back-to-top {
   position: fixed;
-  visibility: hidden;
-  opacity: 0;
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #123241;
   width: 40px;
   height: 40px;
-  border-radius: 50px;
-  transition: all 0.4s;
+  border-radius: 50%;
+  background: #ffbebe;
+
+  /* Flexbox alignment for perfect centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Visibility and smooth transition */
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
+/* Icon Styles */
 .back-to-top i {
-  font-size: 28px;
-  color: #95ff00;
-  line-height: 0;
+  font-size: 18px;
+  color: #ff0000;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  transition: color 0.3s ease-in-out;
 }
 
-.back-to-top:hover {
-  background: #123241;
-  color: #95ff00;
-}
-
+/* Visible State (toggled via JavaScript) */
 .back-to-top.active {
   visibility: visible;
   opacity: 1;
+}
+
+/* Hover & Focus Interactions */
+.back-to-top:hover {
+  background: #ff0000;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top:hover i {
+  color: #ffffff;
 }
 
 /* =========================================
