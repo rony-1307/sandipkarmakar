@@ -200,18 +200,16 @@
         </p>
         <p><b><i class="fa-solid fa-location-dot"></i> {{ data.personal.home_add }}</b></p>
         <div class="social-icons">
-          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
-          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
-              alt="LinkedIn"></a>
-          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
-              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
-          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
-          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
-              alt="ResearchGate"></a>
+          <a href="{{ data.personal.github }}" aria-label="GitHub" target="_blank" rel="noopener noreferrer"> <i
+              class="fa-brands fa-github"></i></a>
+          <a href="{{ data.personal.linkedin }}" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"> <i
+              class="fa-brands fa-linkedin"></i></a>
+          <a href="{{ data.personal.scholar }}" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-google-scholar"></i></a>
+          <a href="{{ data.personal.orcid }}" aria-label="ORCiD" target="_blank" rel="noopener noreferrer"> <i
+              class="fa-brands fa-orcid"></i></a>
+          <a href="{{ data.personal.researchgate }}" aria-label="ResearchGate" target="_blank"
+            rel="noopener noreferrer"> <i class="fa-brands fa-researchgate"></i></a>
         </div>
       </div>
     </div>
@@ -219,7 +217,8 @@
       <p>© {{ data.personal.name }} | Thank you for visiting</p>
     </div>
   </footer>
-  <a href="#" class="back-to-top"><i class="fa-solid fa-angle-up"></i>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 </body>
 <script src="static/js/main/script.js"></script>
 <script src="static/js/main/script_publications.js"></script>

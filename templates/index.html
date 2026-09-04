@@ -36,6 +36,7 @@
         <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
           style="width: 120px; height: 50px; object-fit: contain; display: block;">
       </div>
+    </nav>
   </header><!-- Header Stop -->
 
   <main>
@@ -49,18 +50,16 @@
         <p style="font-size:2rem; font-weight:300;">Ph.D. Scholar at Jadavpur University</p>
         <h2 class="hero-head">Specializing in <span id="typed"></span></h2>
         <div class="social-icons">
-          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
-          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
-              alt="LinkedIn"></a>
-          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
-              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
-          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
-          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
-              alt="ResearchGate"></a>
+          <a href="{{ data.personal.github }}" aria-label="GitHub" target="_blank" rel="noopener noreferrer"> <i
+              class="fa-brands fa-github"></i></a>
+          <a href="{{ data.personal.linkedin }}" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"> <i
+              class="fa-brands fa-linkedin"></i></a>
+          <a href="{{ data.personal.scholar }}" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-google-scholar"></i></a>
+          <a href="{{ data.personal.orcid }}" aria-label="ORCiD" target="_blank" rel="noopener noreferrer"> <i
+              class="fa-brands fa-orcid"></i></a>
+          <a href="{{ data.personal.researchgate }}" aria-label="ResearchGate" target="_blank"
+            rel="noopener noreferrer"> <i class="fa-brands fa-researchgate"></i></a>
         </div>
         <div class="btns">
           <a class="btn primary" href="/about" target="_self">View More</a>
