@@ -699,12 +699,19 @@ nav a.active::after {
 /* =======================
    SOCIAL ICONS (GLOBAL FIX)
 ======================= */
-
 .social-icons {
   display: flex;
   gap: 15px;
   margin-top: 30px;
   flex-wrap: wrap;
+}
+
+.social-icons a,
+.social-icons a:hover,
+.social-icons a:focus {
+  text-decoration: none;
+  /* Removes link underline */
+  outline: none;
 }
 
 .social-icons a {
@@ -715,27 +722,31 @@ nav a.active::after {
   height: 42px;
   border-radius: 50%;
   background: #f1f5f9;
-  transition: 0.3s;
   border: 1px solid #ff0000;
+  transition: all 0.3s ease;
 }
 
+/* Target Font Awesome <i> tags directly */
+.social-icons a i {
+  font-size: 30px;
+  /* Controls icon size */
+  color: #000000;
+  /* Base icon color */
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+/* Container Hover State */
 .social-icons a:hover {
   transform: translateY(-4px);
   background: #b91c1c;
-  border: 1px solid #ffffff;
+  border-color: #ffffff;
 }
 
-.social-icons img {
-  width: 18px;
-  height: 18px;
-  filter: grayscale(20%);
+/* Change Icon Color to White on Hover */
+.social-icons a:hover i {
+  color: #ffffff;
 }
-
-
-
-
-
-
 
 
 ol li {
