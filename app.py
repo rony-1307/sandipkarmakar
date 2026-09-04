@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, jsonify, session, url_for
+from flask import Flask, render_template, request, redirect, jsonify, session, url_for, send_from_directory, abort
 from functools import wraps
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 import os
 import re
 import sqlite3
+import uuid
 from load_sql_data import load_data_from_sql
 from dotenv import load_dotenv
 
@@ -17,6 +19,21 @@ app = Flask(__name__)
 # ============================================================
 app.secret_key = os.environ.get("SECRET_KEY", "dev-only-local-secret-change-me")
 
+# Uploads (contact form attachments)
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024  # 2 MB
+ALLOWED_ATTACHMENT_EXTENSIONS = {
+    # images
+    "jpg", "jpeg", "png", "gif", "webp", "bmp",
+    # pdf
+    "pdf",
+    # documents
+    "doc", "docx", "odt", "rtf",
+    # text
+    "txt", "csv", "md", "log",
+}
+
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Lax",
@@ -24,6 +41,8 @@ app.config.update(
     PERMANENT_SESSION_LIFETIME=timedelta(
         minutes=int(os.environ.get("SESSION_TIMEOUT_MINUTES", "10"))
     ),
+    MAX_CONTENT_LENGTH=MAX_ATTACHMENT_BYTES + (512 * 1024),  # file + form overhead
+    UPLOAD_FOLDER=UPLOAD_FOLDER,
 )
 
 # Admin login from environment (set these on Render)
@@ -65,6 +84,39 @@ def is_valid_phone(phone: str) -> bool:
     phone = phone.strip()
     pattern = r"^\+?[0-9\s\-\(\)]{8,20}$"
     return re.match(pattern, phone) is not None
+
+
+def _allowed_attachment(filename: str) -> bool:
+    if not filename or "." not in filename:
+        return False
+    ext = filename.rsplit(".", 1)[-1].lower()
+    return ext in ALLOWED_ATTACHMENT_EXTENSIONS
+
+
+def _save_attachment(file_storage):
+    """Validate and save uploaded file. Returns (stored_name, original_name) or (None, None)."""
+    if not file_storage or not file_storage.filename:
+        return None, None
+
+    original = secure_filename(file_storage.filename)
+    if not original or not _allowed_attachment(original):
+        return False, None  # signal invalid type
+
+    # size check (Content-Length may already enforce; also check stream)
+    file_storage.stream.seek(0, os.SEEK_END)
+    size = file_storage.stream.tell()
+    file_storage.stream.seek(0)
+    if size > MAX_ATTACHMENT_BYTES:
+        return False, "size"  # signal too large
+
+    if size == 0:
+        return None, None
+
+    ext = original.rsplit(".", 1)[-1].lower()
+    stored = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:10]}.{ext}"
+    dest = os.path.join(app.config["UPLOAD_FOLDER"], stored)
+    file_storage.save(dest)
+    return stored, original
 
 
 def _client_ip():
@@ -136,10 +188,18 @@ def init_messages_db():
             subject TEXT,
             message TEXT NOT NULL,
             ip_address TEXT,
-            created_at TEXT NOT NULL
+            created_at TEXT NOT NULL,
+            attachment_stored TEXT,
+            attachment_original TEXT
         )
         """
     )
+    # Migrate older DBs that lack attachment columns
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(messages)").fetchall()}
+    if "attachment_stored" not in cols:
+        conn.execute("ALTER TABLE messages ADD COLUMN attachment_stored TEXT")
+    if "attachment_original" not in cols:
+        conn.execute("ALTER TABLE messages ADD COLUMN attachment_original TEXT")
     conn.commit()
     conn.close()
 
@@ -208,6 +268,10 @@ def contact():
         subject = clean_text(request.form.get("user_subject", ""), 200)
         message = clean_text(request.form.get("message", ""), 3000)
 
+        attachment_stored = None
+        attachment_original = None
+        file = request.files.get("attachment")
+
         if not name or not phone or not email or not message:
             error = "Please fill Name, Phone Number, Email and Message."
         elif not is_valid_email(email):
@@ -217,35 +281,64 @@ def contact():
         elif len(message) < 10:
             error = "Message is too short."
         else:
-            ip = _client_ip()
+            # Optional attachment validation / save
+            if file and file.filename:
+                stored, original = _save_attachment(file)
+                if stored is False:
+                    if original == "size":
+                        error = "Attachment is too large. Maximum size is 2 MB."
+                    else:
+                        error = "Attachment type not allowed. Use image, PDF, document, or text file."
+                else:
+                    attachment_stored, attachment_original = stored, original
 
-            # Save to DB
-            conn = sqlite3.connect("messages.db")
-            conn.execute(
-                """
-                INSERT INTO messages
-                (name, phone, email, subject, message, ip_address, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                """,
-                (name, phone, email, subject, message, ip, datetime.now().isoformat()),
-            )
-            conn.commit()
-            conn.close()
+            if not error:
+                ip = _client_ip()
 
-            # Save to log file
-            with open("messages_log.txt", "a", encoding="utf-8") as f:
-                f.write(f"\n{'=' * 50}\n")
-                f.write(f"Time   : {datetime.now()}\n")
-                f.write(f"Name   : {name}\n")
-                f.write(f"Phone  : {phone}\n")
-                f.write(f"Email  : {email}\n")
-                f.write(f"Subject: {subject}\n")
-                f.write(f"IP     : {ip}\n")
-                f.write(f"Message:\n{message}\n")
+                # Save to DB
+                conn = sqlite3.connect("messages.db")
+                conn.execute(
+                    """
+                    INSERT INTO messages
+                    (name, phone, email, subject, message, ip_address, created_at,
+                     attachment_stored, attachment_original)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        name, phone, email, subject, message, ip,
+                        datetime.now().isoformat(),
+                        attachment_stored, attachment_original,
+                    ),
+                )
+                conn.commit()
+                conn.close()
 
-            return redirect("/thankyou")
+                # Save to log file
+                with open("messages_log.txt", "a", encoding="utf-8") as f:
+                    f.write(f"\n{'=' * 50}\n")
+                    f.write(f"Time   : {datetime.now()}\n")
+                    f.write(f"Name   : {name}\n")
+                    f.write(f"Phone  : {phone}\n")
+                    f.write(f"Email  : {email}\n")
+                    f.write(f"Subject: {subject}\n")
+                    f.write(f"IP     : {ip}\n")
+                    if attachment_original:
+                        f.write(f"Attachment: {attachment_original} -> {attachment_stored}\n")
+                    f.write(f"Message:\n{message}\n")
+
+                return redirect("/thankyou")
 
     return render_template("contact.html", data=data, error=error)
+
+
+@app.errorhandler(413)
+def request_entity_too_large(e):
+    data = get_data()
+    return render_template(
+        "contact.html",
+        data=data,
+        error="Attachment is too large. Maximum size is 2 MB.",
+    ), 413
 
 
 @app.route("/thankyou")
@@ -349,7 +442,8 @@ def view_messages():
     conn.row_factory = sqlite3.Row
     rows = conn.execute(
         """
-        SELECT id, name, phone, email, subject, message, created_at
+        SELECT id, name, phone, email, subject, message, created_at,
+               attachment_stored, attachment_original
         FROM messages
         ORDER BY id DESC
         """
@@ -386,12 +480,13 @@ def view_messages():
           white-space:pre-wrap;
           line-height:1.5;
         }}
-        a.logout {{
+        a.logout, a.attach {{
           color:#60a5fa;
           text-decoration:none;
-          float:right;
           font-size:14px;
         }}
+        a.logout {{ float:right; }}
+        .attach-row {{ margin-top:10px; font-size:13px; }}
       </style>
     </head>
     <body>
@@ -405,19 +500,62 @@ def view_messages():
         html += "<p>No messages yet.</p>"
     else:
         for r in rows:
+            attach_html = ""
+            if r["attachment_stored"] and r["attachment_original"]:
+                attach_html = (
+                    f'<div class="attach-row">Attachment: '
+                    f'<a class="attach" href="{url_for("download_attachment", message_id=r["id"])}">'
+                    f'{r["attachment_original"]}</a></div>'
+                )
+            # Basic escape for display (message may still need stronger escaping)
+            msg = (r["message"] or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            name = (r["name"] or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            subj = (r["subject"] or "-").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
             html += f"""
             <div class="card">
               <div class="meta">
                 <b>#{r['id']}</b> | {r['created_at']}<br>
-                <b>{r['name']}</b> | {r['phone'] or '-'} | {r['email']}<br>
-                Subject: {r['subject'] or '-'}
+                <b>{name}</b> | {r['phone'] or '-'} | {r['email']}<br>
+                Subject: {subj}
               </div>
-              <div class="msg">{r['message']}</div>
+              <div class="msg">{msg}</div>
+              {attach_html}
             </div>
             """
 
     html += "</body></html>"
     return html
+
+
+@app.route("/view-webpage-messages/attachment/<int:message_id>")
+@login_required
+def download_attachment(message_id):
+    conn = sqlite3.connect("messages.db")
+    conn.row_factory = sqlite3.Row
+    row = conn.execute(
+        "SELECT attachment_stored, attachment_original FROM messages WHERE id = ?",
+        (message_id,),
+    ).fetchone()
+    conn.close()
+
+    if not row or not row["attachment_stored"]:
+        abort(404)
+
+    stored = row["attachment_stored"]
+    # Prevent path traversal
+    if "/" in stored or "\\" in stored or ".." in stored:
+        abort(404)
+
+    folder = app.config["UPLOAD_FOLDER"]
+    if not os.path.isfile(os.path.join(folder, stored)):
+        abort(404)
+
+    return send_from_directory(
+        folder,
+        stored,
+        as_attachment=True,
+        download_name=row["attachment_original"] or stored,
+    )
 
 
 @app.route("/view-webpage-messages/logout")
