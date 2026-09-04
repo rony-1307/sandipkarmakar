@@ -69,34 +69,30 @@
           <p><b><i class="fa-solid fa-envelope"></i></b> {{ data.personal.email1 }}</p>
           <p><b><i class="fa-solid fa-envelope"></i></b> {{ data.personal.email2 }}</p>
           <p><b><i class="fa-solid fa-phone"></i></b> {{ data.personal.phone2 }}</p>
-          <p><b><i class="fa-solid fa-building"></i></b> {{ data.personal.current_organization }}, {{
-            data.personal.current_address }}</p>
-          <p><b><i class="fa-solid fa-house"></i></b> {{ data.personal.home_add }}</p>
+          <p><b><i class="fa-solid fa-location-dot"></i></b> {{ data.personal.home_add }}</p>
           <br>
-          <h3><i class="fa-solid fa-user-plus"></i> Connect with me</h3>
           <div class="social-icons">
-            <a href="https://github.com/rony-1307" target="_blank" title="GitHub"><img
+            <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
                 src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18"
                 alt="GitHub"></a>
-            <a href="https://www.linkedin.com/in/sandip-karmakar-a0239692/" target="_blank" title="LinkedIn"><img
+            <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
                 src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
                 alt="LinkedIn"></a>
-            <a href="https://scholar.google.com/citations?hl=en&user=0YfIk6QAAAAJ" target="_blank"
-              title="GoogleScholar"><img src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
-            <a href="https://orcid.org/0009-0005-4616-4590" target="_blank" title="ORCiD"><img
+            <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+                src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+            <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
                 src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
-            <a href="https://www.researchgate.net/profile/Sandip-Karmakar-4?ev=hdr_xprf" target="_blank"
-              title="ResearchGate"><img
+            <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
                 src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
                 alt="ResearchGate"></a>
           </div>
         </div>
 
-        <!-- RIGHT SIDE -->
-        <div class="contact-right ">
+        <!-- RIGHT SIDE - FORM -->
+        <div class="contact-right">
           <div class="form-box">
             <h2><i class="fa-solid fa-envelope"></i> Send a Message</h2>
-            <form class="contact-form" action="/contact" method="POST" autocomplete="off">
+            <form class="contact-form" action="/contact" method="POST" enctype="multipart/form-data" autocomplete="off">
               <!-- Honeypot (hidden from users, bots will fill it) -->
               <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
               <div class="form-group">
@@ -119,6 +115,14 @@
                 <label>Message</label>
                 <textarea rows="6" name="message" placeholder="Write your message here..." required
                   maxlength="3000"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Attachment <span style="font-weight:400;opacity:.75;">(optional)</span></label>
+                <input type="file" name="attachment" id="attachment"
+                  accept=".jpg,.jpeg,.png,.gif,.webp,.bmp,.pdf,.doc,.docx,.odt,.rtf,.txt,.csv,.md,.log,image/*,application/pdf,text/*">
+                <small class="file-hint">Max 2 MB. Allowed: images, PDF, documents (doc/docx/odt/rtf), text
+                  files.</small>
+                <p id="file-error" style="color:#dc2626; margin-top:6px; display:none;"></p>
               </div>
               <button type="submit" class="btn primary">Send Message</button>
             </form>
@@ -185,5 +189,54 @@
       class="bi bi-arrow-up-short"></i></a>
 </body>
 <script src="static/js/main/script.js"></script>
+
+<script>
+  (function () {
+    var input = document.getElementById("attachment");
+    var err = document.getElementById("file-error");
+    var form = document.querySelector(".contact-form");
+    if (!input || !form) return;
+    var MAX = 2 * 1024 * 1024;
+    var ALLOWED = new Set([
+      "jpg", "jpeg", "png", "gif", "webp", "bmp",
+      "pdf", "doc", "docx", "odt", "rtf",
+      "txt", "csv", "md", "log"
+    ]);
+    function showError(msg) {
+      if (!err) return;
+      err.style.display = msg ? "block" : "none";
+      err.textContent = msg || "";
+    }
+    input.addEventListener("change", function () {
+      showError("");
+      var f = input.files && input.files[0];
+      if (!f) return;
+      if (f.size > MAX) {
+        showError("File is too large. Maximum size is 2 MB.");
+        input.value = "";
+        return;
+      }
+      var ext = (f.name.split(".").pop() || "").toLowerCase();
+      if (!ALLOWED.has(ext)) {
+        showError("File type not allowed. Use image, PDF, document, or text file.");
+        input.value = "";
+      }
+    });
+    form.addEventListener("submit", function (e) {
+      var f = input.files && input.files[0];
+      if (!f) return;
+      if (f.size > MAX) {
+        e.preventDefault();
+        showError("File is too large. Maximum size is 2 MB.");
+        return;
+      }
+      var ext = (f.name.split(".").pop() || "").toLowerCase();
+      if (!ALLOWED.has(ext)) {
+        e.preventDefault();
+        showError("File type not allowed. Use image, PDF, document, or text file.");
+      }
+    });
+  })();
+</script>
 
 </html>
