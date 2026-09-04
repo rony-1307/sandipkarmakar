@@ -317,50 +317,50 @@ CREATE TABLE projects (
 
 INSERT INTO projects (sl, title, proj_display, supervisor, abstract, tools, status, start_date, end_date) VALUES
 (8, 'Cost Effective Design and Implementation of Health Companion System for Human Bio-Signal Acquisition and Remote Monitoring in Rural/Urban Region: An IoT Prototype Model',
- 'static/images/proj_disply/proj8.png',
+ 'static/images/proj_display/proj8.png',
  'Prof. (Dr.) Iti Saha Misra',
  'TBA',
  'Arduino Uno, Heltec WiFi LoRa 32 V3, Advanced Technology EMG Sensor, Arduino IDE, Python Programming Language',
  'Ongoing', '04/09/2025', 'Ongoing'),
 
 (7, 'EMG Signal Acquisition and Transmission Over Low-Cost LoRa Wireless System: Analysis for Fatigue Muscle',
- 'static/images/proj_disply/proj7.png',
+ 'static/images/proj_display/proj7.png',
  'Prof. (Dr.) Iti Saha Misra',
  'A vital instrument for measuring skeletal muscle electrical activity, electromyography (EMG) is used extensively in clinical diagnostics, sports science, and rehabilitation to track muscle exhaustion, which is a reduction in force production capability brought on by extended exercise. This thesis introduces a portable, affordable device that uses surface electromyography (sEMG) and LoRa wireless technology to assess muscle fatigue remotely. The system uses a Heltec LoRa 32 V2, an Arduino Uno, and an Advanced Technologies EMG Sensor V3.0 to record, analyze, and send EMG signals at 433 MHz over great distances (1–15 km) while using minimal power. Data capture (sampling EMG signals every 100 ms for 30 seconds), transmission over LoRa, and reception for viewing and analysis are its three stages of operation. To identify fatigue indicators such as MDF/MF shifts, RMS/MAV decreases, and increased signal variability, EMG signal analysis uses time domain (RMS, MAV, ZC, SSC, iEMG, variance, autocorrelation, waveform length), frequency domain (MF, MDF, PSD, PF, TP), time-frequency (STFT, WT, HHT), and nonlinear (SampEn, ApEn, Lyapunov, fractal dimension) techniques. Subjects'' pre, mid, and post-activity data show flattening curves with tiredness onset and increasing amplitude/frequency during activity. The method shows promise for real-time muscle monitoring in resource-constrained environments, such sports grounds and rural clinics, providing a cost-effective substitute for pricey commercial EMG equipment. This LoRa-based EMG system bridges the gap between state-of-the-art biomedical technology and accessibility by improving muscle fatigue analysis for performance enhancement, injury prevention, and rehabilitation.',
  'Arduino Uno, Heltec WiFi LoRa 32 V3, Advanced Technology EMG Sensor, Arduino IDE, Python Programming Language',
  'Complete', '02/05/2024', '09/06/2025'),
 
 (6, 'Development of an IoT-Driven Wireless Smart Health Care System for Continuous Heart Monitoring',
- 'static/images/proj_disply/proj6.png',
+ 'static/images/proj_display/proj6.png',
  'Prof. (Dr.) Iti Saha Misra',
  'The swift development of IoT driven Telemedicine for the continuous remote monitoring of patients have motivated to use Message Queuing Telemetry Transport (MQTT) protocol with a Motorized Hand-Cuff type BP Machine, a LoRa enable ESP32 and Raspberry Pi 5 to design an efficient, real time heart monitoring system. The total cardiac health condition was acquired as BP and Heart Rate and transmitted to another location by means of Wireless Communication using a widely used light weight MQTT protocol for our application. The health data was acquired using an affordable and energy efficient LoRa with low-cost sensors and the MQTT protocol was deployed using LoRa and Raspberry pi.',
  'Heltec WiFi LoRa 32 V3, Raspberry Pi 5, MQTT Protocol, LAN',
  'Complete', '06/09/2024', '30/01/2025'),
 
 (5, 'Design SPI Protocol',
- 'static/images/proj_disply/proj5.png',
+ 'static/images/proj_display/proj5.png',
  'Sandeepani School of Embedded System Design Koramangala, Bangalore, Karnataka',
  'we design this project in Verilog code in Vivado platform. SPI (Serial Peripheral Interface) Protocol, it is a communication between Master and Slave, Master and Slave communicate through MOSI (Master Out Slave In) and MISO (Master Out Slave In), there have four mode it is working on the signal of CPOL and CPHA',
  'Vivado Programming Platform, Verilog Programming, ZED Board',
  'Complete', '06/06/2022', '05/07/2022'),
 
 (4, 'Automatic Unauthorized Parking Detector with SMS Notification using IOT',
- 'static/images/proj_disply/proj4.png',
+ 'static/images/proj_display/proj4.png',
  'Dr. Dipankar Kundu',
  'Due to high population growth, car demand has increased at an alarming rate. This leads to increase in demand for more parking slots, which poses an acute problem, especially, when we are concerned with metro and fairly large cities. A solution to this problem on priority basis is necessary. People should have to cater to the illegal parking aspect as well. This paper deals with the detection of illegal parking and it also helps to identify the vehicles, which are parked in non-parking areas and send information regarding those vehicles to the control office. Thus it is meant for decreasing the number of illegal parking. A Raspberry Pi processor is the main device, which is able to manage the whole task. Advanced techniques of image processing, using Support Vector Machine (SVM) algorithm and Optical Character Recognition (OCR), have been used in the model.',
  'Raspberry Pi 3B+, Python Programming Language, SVM Classifier, OpenCV, Image Processing',
  'Complete', 'August 2018', 'May 2019'),
 
-(3, 'Wi-Fi Controlled Robo Car', 'static/images/proj_disply/proj3.png', NULL, 'TBA', 'NodeMCU, Arduino Uno, Arduino IDE C Programming', 'Complete', 'February 2018', 'March 2018'),
+(3, 'Wi-Fi Controlled Robo Car', 'static/images/proj_display/proj3.png', NULL, 'TBA', 'NodeMCU, Arduino Uno, Arduino IDE C Programming', 'Complete', 'February 2018', 'March 2018'),
 
 (2, 'Design of Secured Wireless Real Time Electronic Voting Machine for Data Acquisition',
- 'static/images/proj_disply/proj2.png',
+ 'static/images/proj_display/proj2.png',
  'Subhadeep Chakrabarti',
  'Electronic Voting Machine or EVM is generally used to count the poll result at the time of vote. In EVM generally a counting part is available where the counting are done and the count value is stored in the memory. In this paper, the design of the Wireless EVM has been proposed where the counting will be done in a remote section to avoid the fault or error caused by the several problems such as wrong button press, wrong counting, theft caused by the Stationary EVM. The data will be transferred from the EVM machine through a transmitter and this signal will be caught up by the receiver of the Counting module. The count will be shown at the display side as per preference that is the real time display can be turned off during the poll time. In this device, the voter cannot press the poll button of their preference twice as the device will be deactivated after single press. That is why the design proposed in this paper is of reduced error and works efficiently.',
  'Microcontroller AT89C51, Keil C Programming language',
  'Complete', 'August 2015', 'May 2016'),
 
-(1, 'Automatic Street Light Control', 'static/images/proj_disply/proj1.png', NULL, 'TBA', 'PIR Motion Sensor, High gain Transistor', 'Complete', 'August 2015', 'September 2015');
+(1, 'Automatic Street Light Control', 'static/images/proj_display/proj1.png', NULL, 'TBA', 'PIR Motion Sensor, High gain Transistor', 'Complete', 'August 2015', 'September 2015');
 
 -- ------------------------------------------------------------
 -- 6. ACHIEVEMENTS
