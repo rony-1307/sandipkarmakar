@@ -7,3 +7,4 @@ messages_log.txt
 venv/
 *.log
 .DS_Store
+uploads/
