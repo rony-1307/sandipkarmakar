@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sandip Karmakar Portfolio </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ data.personal.logo }}">
+
+  <!-- Google Fonts optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAin CSS -->
+  <link rel="stylesheet" href="static/css/main/style.css">
+  <link rel="stylesheet" href="static/css/main/style_project.css">
+
+</head>
+
+<body>
+
+  <header>
+    <!--Navbar-->
+    <nav>
+      <div class="logo">
+        <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+          style="width: 120px; height: 50px; object-fit: contain; display: block;">
+      </div>
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Nav Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/education">Education</a>
+        <a href="/experience">Experience</a>
+        <a href="/publications">Publications</a>
+        <a href="/projects" class="active">Projects</a>
+        <a href="/achievements">Achievements</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PROJECTS -->
+    <section class="section" id="pro">
+      <h2 class="title"><i class="fa-solid fa-laptop-code"></i> Projects</h2>
+      <p style="margin-top:20px; color:#475569; font-size:14px; line-height:1.6;">
+        <i class="fa-solid fa-circle-info" style="color:#eb2525; margin-right:6px;"></i>
+        Click on any card to view the project abstract.
+      </p>
+
+      <div class="grid projects-grid">
+        {% for proj in data.projects %}
+        <div class="project-flip-card">
+          <div class="project-flip-inner">
+
+            <!-- FRONT -->
+            <div class="project-flip-front">
+              <div class="update-top">
+                <span class="status status-review">{{ proj.status or 'Project' }}</span>
+                <span class="update-date">
+                  <i class="fa-solid fa-calendar"></i> {{ proj.start }} – {{ proj.end }}
+                </span>
+              </div>
+
+              {% if proj.proj_display %}
+              <img src="{{ proj.proj_display }}" alt="{{ proj.title }}" class="project-thumb">
+              {% endif %}
+
+              <h3>{{ proj.title }}</h3>
+
+              {% if proj.supervisor %}
+              <p class="meta">Supervisor: {{ proj.supervisor }}</p>
+              {% endif %}
+
+              {% if proj.tools %}
+              <div class="hero-tags">
+                {% for tool in proj.tools.split(',') %}
+                <span>{{ tool.strip() }}</span>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <button type="button" class="flip-btn">
+                <i class="fa-solid fa-rotate"></i> Click to view abstract
+              </button>
+            </div>
+
+            <!-- BACK -->
+            <div class="project-flip-back">
+              <h4><i class="fa-solid fa-file-lines"></i> Project Abstract</h4>
+              <div class="abstract-box">
+                {% if proj.abstract and proj.abstract != 'TBA' %}
+                <p>{{ proj.abstract }}</p>
+                {% else %}
+                <p>Abstract will be updated soon.</p>
+                {% endif %}
+              </div>
+              <button type="button" class="flip-btn">
+                <i class="fa-solid fa-rotate"></i> Click to flip back
+              </button>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- LEFT -->
+      <div class="footer-left">
+        <div class="logo">
+          <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+            style="width: 120px; height: 50px; object-fit: contain; display: block;">
+        </div>
+        <h3>{{ data.personal.name }}</h3>
+        <strong>
+          <p>{{ data.personal.current_designation }}</p>
+          <p>{{ data.personal.current_department }}</p>
+          <p>{{ data.personal.current_organization }}</p>
+          <p>{{ data.personal.current_address }}</p>
+        </strong>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <h4><i class="fa-solid fa-address-book"></i> Contact</h4>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a
+            href="mailto:{{ data.personal.email1 }}">{{data.personal.email1
+            }}</a></p>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a href="mailto:{{ data.personal.email2 }}">{{
+            data.personal.email2 }}</a></p>
+        <p><b><i class="fa-solid fa-phone"></i></b> <a href="tel:{{ data.personal.phone2 }}"> {{ data.personal.phone2
+            }}</a></p>
+        <p><b><i class="fa-solid fa-location-dot"></i></b> {{ data.personal.home_add }}</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ data.personal.name }} | Thank you for visiting</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+</body>
+<script src="static/js/main/script.js"></script>
+<script src="static/js/main/script_project.js"></script>
+
+</html>

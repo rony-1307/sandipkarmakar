@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sandip Karmakar Portfolio </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ data.personal.logo }}">
+
+  <!-- Google Fonts optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAin CSS -->
+  <link rel="stylesheet" href="static/css/main/style.css">
+</head>
+
+<body>
+  <header>
+    <!--Navbar-->
+    <nav>
+      <div class="logo">
+        <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+          style="width: 120px; height: 50px; object-fit: contain; display: block;">
+      </div>
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Nav Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/education">Education</a>
+        <a href="/experience">Experience</a>
+        <a href="/publications">Publications</a>
+        <a href="/projects">Projects</a>
+        <a href="/achievements">Achievements</a>
+        <a href="/contact" class="active">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- CONTACT SECTION -->
+    <section class="section">
+      <h2 class="title"><i class="fa-solid fa-paper-plane"></i> Get In Touch</h2>
+      <div class="contact-grid">
+
+        <!-- LEFT SIDE -->
+        <div class="contact-left">
+          <h2><i class="fa-solid fa-address-book"></i> Contact</h2>
+          <br>
+          <p><b>{{ data.personal.name }}</b> </p>
+          <p><b><i class="fa-solid fa-envelope"></i></b> {{ data.personal.email1 }}</p>
+          <p><b><i class="fa-solid fa-envelope"></i></b> {{ data.personal.email2 }}</p>
+          <p><b><i class="fa-solid fa-phone"></i></b> {{ data.personal.phone2 }}</p>
+          <p><b><i class="fa-solid fa-building"></i></b> {{ data.personal.current_organization }}, {{
+            data.personal.current_address }}</p>
+          <p><b><i class="fa-solid fa-house"></i></b> {{ data.personal.home_add }}</p>
+          <br>
+          <h3><i class="fa-solid fa-user-plus"></i> Connect with me</h3>
+          <div class="social-icons">
+            <a href="https://github.com/rony-1307" target="_blank" title="GitHub"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18"
+                alt="GitHub"></a>
+            <a href="https://www.linkedin.com/in/sandip-karmakar-a0239692/" target="_blank" title="LinkedIn"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+                alt="LinkedIn"></a>
+            <a href="https://scholar.google.com/citations?hl=en&user=0YfIk6QAAAAJ" target="_blank"
+              title="GoogleScholar"><img src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+            <a href="https://orcid.org/0009-0005-4616-4590" target="_blank" title="ORCiD"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+            <a href="https://www.researchgate.net/profile/Sandip-Karmakar-4?ev=hdr_xprf" target="_blank"
+              title="ResearchGate"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+                alt="ResearchGate"></a>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="contact-right ">
+          <div class="form-box">
+            <h2><i class="fa-solid fa-envelope"></i> Send a Message</h2>
+            <form class="contact-form" action="/contact" method="POST" autocomplete="off">
+              <!-- Honeypot (hidden from users, bots will fill it) -->
+              <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required maxlength="100">
+              </div>
+              <div class="form-group">
+                <label>Phone No</label>
+                <input type="tel" name="phone" placeholder="Enter your phone no" required maxlength="20">
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email" required maxlength="150">
+              </div>
+              <div class="form-group">
+                <label>Subject</label>
+                <input type="text" name="user_subject" placeholder="Enter subject" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea rows="6" name="message" placeholder="Write your message here..." required
+                  maxlength="3000"></textarea>
+              </div>
+              <button type="submit" class="btn primary">Send Message</button>
+            </form>
+            {% if error %}
+            <p style="color:#dc2626; margin-top:12px;">{{ error }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- LEFT -->
+      <div class="footer-left">
+        <div class="logo">
+          <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+            style="width: 120px; height: 50px; object-fit: contain; display: block;">
+        </div>
+        <h3>{{ data.personal.name }}</h3>
+        <strong>
+          <p>{{ data.personal.current_designation }}</p>
+          <p>{{ data.personal.current_department }}</p>
+          <p>{{ data.personal.current_organization }}</p>
+          <p>{{ data.personal.current_address }}</p>
+        </strong>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <h4><i class="fa-solid fa-address-book"></i> Contact</h4>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a
+            href="mailto:{{ data.personal.email1 }}">{{data.personal.email1
+            }}</a></p>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a href="mailto:{{ data.personal.email2 }}">{{
+            data.personal.email2 }}</a></p>
+        <p><b><i class="fa-solid fa-phone"></i></b> <a href="tel:{{ data.personal.phone2 }}"> {{ data.personal.phone2
+            }}</a></p>
+        </p>
+        <p><b><i class="fa-solid fa-location-dot"></i> {{ data.personal.home_add }}</b></p>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ data.personal.name }} | Thank you for visiting</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+</body>
+<script src="static/js/main/script.js"></script>
+
+</html>

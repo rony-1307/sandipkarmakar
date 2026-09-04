@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sandip Karmakar Portfolio </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ data.personal.logo }}">
+
+  <!-- Google Fonts optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAin CSS -->
+  <link rel="stylesheet" href="static/css/main/style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+          style="width: 120px; height: 50px; object-fit: contain; display: block;">
+      </div>
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Nav Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/education">Education</a>
+        <a href="/experience">Experience</a>
+        <a href="/publications" class="active">Publications</a>
+        <a href="/projects">Projects</a>
+        <a href="/achievements">Achievements</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PUBLICATIONS -->
+    <section class="section" id="pub">
+      <h2 class="title"><i class="fa-solid fa-file-circle-check"></i> Publications</h2>
+      <p style="margin-top:20px; color:#475569; font-size:14px; line-height:1.6;">
+        <i class="fa-solid fa-circle-info" style="color:#eb2525; margin-right:6px;"></i>
+        If any PDF is unavailable online or cannot be accessed, please feel free to contact me. I would be happy to
+        share a copy of the paper.
+      </p>
+
+      {% set pub_type_order = ['Book', 'Conference', 'Journal', 'Patent'] %}
+
+      <div style="display:flex; flex-wrap:wrap; gap:18px; margin-bottom:22px;">
+        <div class="card" style="flex:1 1 420px; min-width:280px; margin-bottom:0;">
+          <h3 style="color:#eb2525; margin-bottom:15px;"><i class="fa-solid fa-chart-column"
+              style="margin-right:8px;"></i>Publication Summary</h3>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            {% for pub_type in pub_type_order %}
+            {% set type_pubs = data.publications|selectattr('type', 'equalto', pub_type)|list %}
+            <div
+              style="flex:1 1 80px; min-width:80px; padding:10px 8px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc; text-align:center;">
+              <div style="font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:0.04em;">{{ pub_type
+                }}
+              </div>
+              <div style="font-size:22px; font-weight:700; color:#2a0f0f; margin-top:3px;">{{ type_pubs|length }}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="card" style="flex:1 1 420px; min-width:280px; margin-bottom:0;">
+          <h3 style="color:#eb2525; margin-bottom:15px;"><i class="fa-solid fa-chart-line"
+              style="margin-right:8px;"></i>Research Metrics</h3>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <div
+              style="flex:1 1 80px; min-width:80px; padding:10px 8px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc; text-align:center;">
+              <div style="font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:0.04em;">Citations
+              </div>
+              <div style="font-size:22px; font-weight:700; color:#2a0f0f; margin-top:3px;">0</div>
+            </div>
+            <div
+              style="flex:1 1 80px; min-width:80px; padding:10px 8px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc; text-align:center;">
+              <div style="font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:0.04em;">h-index</div>
+              <div style="font-size:22px; font-weight:700; color:#2a0f0f; margin-top:3px;">0</div>
+            </div>
+            <div
+              style="flex:1 1 80px; min-width:80px; padding:10px 8px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc; text-align:center;">
+              <div style="font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:0.04em;">i10-index
+              </div>
+              <div style="font-size:22px; font-weight:700; color:#2a0f0f; margin-top:3px;">0</div>
+            </div>
+            <div
+              style="flex:1 1 80px; min-width:80px; padding:10px 8px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc; text-align:center;">
+              <div style="font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:0.04em;">Publications
+              </div>
+              <div style="font-size:22px; font-weight:700; color:#2a0f0f; margin-top:3px;">{{ data.publications|length
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% for pub_type in pub_type_order %}
+      {% set type_pubs = data.publications|selectattr('type', 'equalto', pub_type)|sort(attribute='sl', reverse=True) %}
+      {% if type_pubs %}
+      <div class="card" style="margin-bottom:22px;">
+        <h3 style="color:#eb2525; margin-bottom:15px;"><i class="fa-solid fa-file-lines"
+            style="margin-right:8px;"></i>{{ pub_type }}</h3>
+
+        {% for pub in type_pubs %}
+        {% set ieee_authors = pub.authors|replace(';', ', ') %}
+        {% set ieee_ref = '[' ~ (loop.index) ~ '] ' ~ ieee_authors ~ ', \"' ~ pub.title ~ '\", ' ~ pub.venue ~ ', ' ~
+        pub.status ~ '.' %}
+        <div style="padding:12px 0; border-top:1px solid #e2e8f0;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:220px;">
+              <p style="margin:0 0 6px; color:#2a0f0f; font-weight:700;">
+                <span style="display:inline-block; min-width:28px; color:#eb2525;">[{{ loop.index }}]</span>
+                {{ pub.title }}
+              </p>
+              <p style="margin:0 0 6px; color:#475569;">
+                {{ pub.authors|replace(data.personal.name, '<span
+                  style="font-weight:700; color:#2a0f0f; background:#fef3c7; padding:0 4px; border-radius:4px;">' ~
+                  data.personal.name ~ '</span>')|safe }}
+              </p>
+              <p style="margin:0 0 6px; color:#475569;">{{ pub.venue }}</p>
+              {% if pub.doi and pub.doi != 'TBA' %}
+              <p style="margin:0 0 6px;"><strong>DOI:</strong> {{ pub.doi }}</p>
+              {% endif %}
+              {% if pub.link and pub.link != 'TBA' %}
+              <p style="margin:0 0 10px;"><a href="{{ pub.link }}" target="_blank" style="color:var(--accent);">View
+                  Publication →</a></p>
+              {% endif %}
+              <span class="status status-review">{{ pub.status }}</span>
+            </div>
+            <div style="flex-shrink:0;">
+              <button type="button" data-citation='{{ ieee_ref|tojson|safe }}' onclick="copyCitation(this)"
+                style="display:inline-block; padding:8px 12px; border:1px solid #eb2525; border-radius:8px; background:#ffefef; color:#d81d1d; text-decoration:none; font-size:12px; font-weight:600; cursor:pointer;">
+                Cite this
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      <br>
+      <br>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- LEFT -->
+      <div class="footer-left">
+        <div class="logo">
+          <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+            style="width: 120px; height: 50px; object-fit: contain; display: block;">
+        </div>
+        <h3>{{ data.personal.name }}</h3>
+        <strong>
+          <p>{{ data.personal.current_designation }}</p>
+          <p>{{ data.personal.current_department }}</p>
+          <p>{{ data.personal.current_organization }}</p>
+          <p>{{ data.personal.current_address }}</p>
+        </strong>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <h4><i class="fa-solid fa-address-book"></i> Contact</h4>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a
+            href="mailto:{{ data.personal.email1 }}">{{data.personal.email1
+            }}</a></p>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a href="mailto:{{ data.personal.email2 }}">{{
+            data.personal.email2 }}</a></p>
+        <p><b><i class="fa-solid fa-phone"></i></b> <a href="tel:{{ data.personal.phone2 }}"> {{ data.personal.phone2
+            }}</a></p>
+        </p>
+        <p><b><i class="fa-solid fa-location-dot"></i> {{ data.personal.home_add }}</b></p>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ data.personal.name }} | Thank you for visiting</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+</body>
+<script src="static/js/main/script.js"></script>
+<script src="static/js/main/script_publications.js"></script>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sandip Karmakar Portfolio </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ data.personal.logo }}">
+
+  <!-- Google Fonts optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAin CSS -->
+  <link rel="stylesheet" href="static/css/main/style.css">
+  <link rel="stylesheet" href="static/css/main/style_experience.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+          style="width: 120px; height: 50px; object-fit: contain; display: block;">
+      </div>
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Nav Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/education">Education</a>
+        <a href="/experience" class="active">Experience</a>
+        <a href="/publications">Publications</a>
+        <a href="/projects">Projects</a>
+        <a href="/achievements">Achievements</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2 class="title"><i class="fa-solid fa-briefcase"></i> Experience</h2>
+      {% if data.total_experience_duration %}
+      <p style="margin-top:20px; color:#475569; font-size:14px; line-height:1.6;">
+        <i class="fa-solid fa-circle-info" style="color:#eb2525; margin-right:6px;"></i>
+        <span><b>Total Working Experience:</b></span> {{ data.total_experience_duration }}
+      </p>
+      {% endif %}
+      <!--<div class="grid">-->
+      <!--Exp.2-->
+      {% for exp in data.experience %}
+      <div class="card">
+        <div class="update-top">
+          <h2>{{ exp.position }}</h2>
+          <p>
+            <b><i class="fa-solid fa-calendar"></i></b> {{ exp.doj }} – {{ exp.dor }}<br>
+            <b><i class="fa-solid fa-stopwatch"></i></b> {{ exp.duration }}
+          </p>
+        </div>
+        <h3> {{ exp.organization }} </h3>
+        <p><b><i class="fa-solid fa-location-dot"></i></b> {{ exp.org_add }}</p>
+        <p><b><i class="fa-solid fa-building-columns"></i></b> {{ exp.department }}</p>
+        <div class="edu-details">
+          <button class="collapse-btn">View Details<i class="fa-solid fa-chevron-down"></i></button>
+          <div class="collapse-content">
+            <p><b>Responsibilities:</b> {{ exp.responsibilities }}</p>
+            <p><b>Other Responsibilities:</b> {{ exp.other }} </p>
+            <p><b>Type of Job:</b> </p>
+            <p><b>Salary:</b> {{ exp.salary }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!--</div>-->
+    </section>
+
+    <!-- INDUSTRIAL TRAINING SECTION -->
+    <section class="section about-panel">
+      <h2 class="title"> <i class="fa-solid fa-laptop-code"></i> Industrial Training </h2>
+      {% if data.total_training_duration %}
+      <p style="margin-top:20px; color:#475569; font-size:14px; line-height:1.6;">
+        <i class="fa-solid fa-circle-info" style="color:#eb2525; margin-right:6px;"></i>
+        <span><b>Total Industial Training Experience:</b></span> {{ data.total_training_duration }}
+      </p>
+      {% endif %}
+      <div class="training-slider-wrapper"> <!-- Previous Button --> <button class="slider-btn prev" id="trainingPrev"
+          aria-label="Previous training"> <i class="fa-solid fa-chevron-left"></i> </button> <!-- Slider -->
+        <div class="training-slider" id="trainingSlider">
+          {% for t in data.training %}
+          <div class="training-card">
+            <div class="training-number"> {{ t.sl }}</div>
+            <img src="{{ t.topic_display }}" alt="Introduction to IoT with AI ML and Cloud Computing"
+              class="training-image">
+            <h3> {{ t.topic }}</h3>
+            <p class="update-text"> {{ t.topic_description }}</p>
+            <div class="update-meta">
+              <p> <i class="fa-solid fa-building-columns"></i> {{ t.org }}</p>
+              <p> <i class="fa-solid fa-location-dot"></i> {{ t.org_add }}</p>
+              <p><span class="date-duration">
+                  <i class="fa-solid fa-calendar"></i>
+                  {{ t.start }} - {{ t.end }}
+                  <i class="fa-solid fa-stopwatch"></i>
+                  {{ t.duration }}
+                </span>
+              </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div> <!-- Next Button --> <button class="slider-btn next" id="trainingNext" aria-label="Next training"> <i
+            class="fa-solid fa-chevron-right"></i> </button>
+      </div> <!-- Slider Dots -->
+      <div class="training-dots" id="trainingDots"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- LEFT -->
+      <div class="footer-left">
+        <div class="logo">
+          <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+            style="width: 120px; height: 50px; object-fit: contain; display: block;">
+        </div>
+        <h3>{{ data.personal.name }}</h3>
+        <strong>
+          <p>{{ data.personal.current_designation }}</p>
+          <p>{{ data.personal.current_department }}</p>
+          <p>{{ data.personal.current_organization }}</p>
+          <p>{{ data.personal.current_address }}</p>
+        </strong>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <h4><i class="fa-solid fa-address-book"></i> Contact</h4>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a
+            href="mailto:{{ data.personal.email1 }}">{{data.personal.email1
+            }}</a></p>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a href="mailto:{{ data.personal.email2 }}">{{
+            data.personal.email2 }}</a></p>
+        <p><b><i class="fa-solid fa-phone"></i></b> <a href="tel:{{ data.personal.phone2 }}"> {{ data.personal.phone2
+            }}</a></p>
+        </p>
+        <p><b><i class="fa-solid fa-location-dot"></i> {{ data.personal.home_add }}</b></p>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ data.personal.name }} | Thank you for visiting</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+</body>
+<script src="static/js/main/script.js"></script>
+<script src="static/js/main/script_experience.js"></script>
+
+</html>

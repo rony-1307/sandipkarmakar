@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sandip Karmakar Portfolio </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ data.personal.logo }}">
+
+  <!-- Google Fonts optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAin CSS -->
+  <link rel="stylesheet" href="static/css/main/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+          style="width: 120px; height: 50px; object-fit: contain; display: block;">
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/education">Education</a>
+        <a href="/experience">Experience</a>
+        <a href="/publications">Publications</a>
+        <a href="/projects">Projects</a>
+        <a href="/achievements" class="active">Achievements</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section" id="achievements">
+      <h2 class="title"><i class="fa-solid fa-award"></i> Achievements</h2>
+
+      <p style="margin-top:20px; color:#475569; font-size:14px; line-height:1.6;">
+        <i class="fa-solid fa-circle-info" style="color:#eb2525; margin-right:6px;"></i>
+        Key academic, research and professional milestones.
+      </p>
+
+      <div class="grid">
+        {% for ach in data.achievements %}
+        <div class="card update-card">
+          <div class="update-top">
+            {% if ach.status == 'Qualified' or ach.status == 'Published' or ach.status == 'Accepted' %}
+            <span class="status status-published">{{ ach.status }}</span>
+            {% elif ach.status == 'Ongoing' %}
+            <span class="status status-review">{{ ach.status }}</span>
+            {% else %}
+            <span class="status status-review">{{ ach.status }}</span>
+            {% endif %}
+            <span class="update-date">
+              {% if ach.start == ach.end %}
+              {{ ach.start }}
+              {% else %}
+              {{ ach.start }} – {{ ach.end }}
+              {% endif %}
+            </span>
+          </div>
+
+          <h3>
+            {% if ach.category == 'Exam' %}
+            <i class="fa-solid fa-medal"></i>
+            {% elif ach.category == 'Position' %}
+            <i class="fa-solid fa-briefcase"></i>
+            {% elif ach.category == 'Publication' %}
+            <i class="fa-solid fa-file-circle-check"></i>
+            {% elif ach.category == 'Teaching' %}
+            <i class="fa-solid fa-chalkboard-user"></i>
+            {% elif ach.category == 'Training' %}
+            <i class="fa-solid fa-laptop-code"></i>
+            {% else %}
+            <i class="fa-solid fa-award"></i>
+            {% endif %}
+            {{ ach.title }}
+          </h3>
+
+          <p class="update-text">{{ ach.description }}</p>
+
+          <div class="update-meta">
+            {% if ach.organization %}
+            <p><i class="fa-solid fa-building-columns"></i> {{ ach.organization }}</p>
+            {% endif %}
+            {% if ach.location %}
+            <p><i class="fa-solid fa-location-dot"></i> {{ ach.location }}</p>
+            {% endif %}
+          </div>
+
+          {% if ach.link %}
+          <a class="update-link" href="{{ ach.link }}" target="_blank">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Details
+          </a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- LEFT -->
+      <div class="footer-left">
+        <div class="logo">
+          <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+            style="width: 120px; height: 50px; object-fit: contain; display: block;">
+        </div>
+        <h3>{{ data.personal.name }}</h3>
+        <strong>
+          <p>{{ data.personal.current_designation }}</p>
+          <p>{{ data.personal.current_department }}</p>
+          <p>{{ data.personal.current_organization }}</p>
+          <p>{{ data.personal.current_address }}</p>
+        </strong>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <h4><i class="fa-solid fa-address-book"></i> Contact</h4>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a
+            href="mailto:{{ data.personal.email1 }}">{{data.personal.email1
+            }}</a></p>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a href="mailto:{{ data.personal.email2 }}">{{
+            data.personal.email2 }}</a></p>
+        <p><b><i class="fa-solid fa-phone"></i></b> <a href="tel:{{ data.personal.phone2 }}"> {{ data.personal.phone2
+            }}</a></p>
+        </p>
+        <p><b><i class="fa-solid fa-location-dot"></i> {{ data.personal.home_add }}</b></p>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ data.personal.name }} | Thank you for visiting</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+</body>
+<script src="static/js/main/script.js"></script>
+
+</html>

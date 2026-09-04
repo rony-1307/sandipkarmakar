@@ -1,0 +1,207 @@
+.training-slider-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ========================================================= SLIDER ========================================================= */
+.training-slider {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 15px 5px 25px;
+  cursor: grab;
+  -ms-overflow-style: none;
+}
+
+.training-slider:active {
+  cursor: grabbing;
+}
+
+.training-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================================= TRAINING CARD ========================================================= */
+.training-card {
+  position: relative;
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 15px;
+  background: var(--card-bg, #ffffff);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.training-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+}
+
+/* ========================================================= TRAINING NUMBER ========================================================= */
+.training-number {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ff0000;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+/* ========================================================= IMAGE ========================================================= */
+.training-image {
+  width: 100%;
+  height: 200px;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 12px 0 18px;
+}
+
+/* ========================================================= CARD TITLE ========================================================= */
+.training-card h3 {
+  margin: 10px 0;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+/* ========================================================= DESCRIPTION ========================================================= */
+.training-card .update-text {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* ========================================================= META INFORMATION ========================================================= */
+.training-card .update-meta p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+
+.training-card .update-meta i {
+  min-width: 18px;
+  margin-top: 4px;
+}
+
+/* ========================================================= SLIDER BUTTONS ========================================================= */
+.slider-btn {
+  flex: 0 0 45px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: #222222;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slider-btn:hover {
+  background: #ff0000;
+  transform: scale(1.08);
+}
+
+.slider-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================================= DOTS ========================================================= */
+.training-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.training-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #cccccc;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.training-dot.active {
+  width: 25px;
+  border-radius: 10px;
+  background: #ff0000;
+}
+
+/* ========================================================= TABLET ========================================================= */
+@media (max-width: 992px) {
+  .training-card {
+    flex: 0 0 calc((100% - 20px) / 2);
+  }
+}
+
+/* ========================================================= MOBILE ========================================================= */
+@media (max-width: 600px) {
+  .training-slider-wrapper {
+    gap: 5px;
+  }
+
+  .training-card {
+    flex: 0 0 100%;
+    padding: 16px;
+  }
+
+  .training-image {
+    height: 180px;
+  }
+
+  .training-card h3 {
+    font-size: 18px;
+  }
+
+  .slider-btn {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+
+  .training-number {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+/* ========================================================= SMALL MOBILE ========================================================= */
+@media (max-width: 400px) {
+  .slider-btn {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    font-size: 13px;
+  }
+}

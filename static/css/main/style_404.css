@@ -1,0 +1,35 @@
+.pageWrapper {
+  text-align: center;
+  padding: 4rem;
+}
+
+.errorMessage {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+
+/* colour palette */
+/*
+:root {
+  --primary: #b91c1c;
+  --surface: #ffffff;
+  --background: #fff7f7;
+  --color1: #eaeadd;
+  --color2: #ae0f0f;
+  --color3: #620000;
+
+  --header_background: #260a0a;
+  --header_text_colour: #ffcccc;
+  --header_link_colour: #ffcccc;
+
+  --body_background: #fff0f0;
+  --body_text_colour: #bc8a8a;
+
+  --footer_background: #260a0a;
+  --footer_header_colour: #ffcccc;
+  --footer_text_colour: #bc8a8a;
+  --footer_bottom_link: #ff0000;
+  --footer_bottom_text_colour: #ffafaf;
+}*/

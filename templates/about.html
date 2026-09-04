@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sandip Karmakar Portfolio </title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="icon" href="{{ data.personal.logo }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ data.personal.logo }}">
+
+  <!-- Google Fonts optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAin CSS -->
+  <link rel="stylesheet" href="static/css/main/style.css">
+</head>
+
+<body>
+
+  <header>
+    <!--Navbar-->
+    <nav>
+      <div class="logo">
+        <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+          style="width: 120px; height: 50px; object-fit: contain; display: block;">
+      </div>
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Nav Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/about" class="active">About</a>
+        <a href="/education">Education</a>
+        <a href="/experience">Experience</a>
+        <a href="/publications">Publications</a>
+        <a href="/projects">Projects</a>
+        <a href="/achievements">Achievements</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-image">
+        <img src="{{ data.personal.profile_image }}" alt="IMAGE">
+      </div>
+
+      <div class="hero-text">
+        <h1>{{ data.personal.name }}</h1>
+        <h2 class="hero-role">{{ data.personal.current_designation }} at {{ data.personal.current_organization }}</h2>
+        <p class="hero-description">
+          Researcher and Developer focused on IoT, Embedded Systems, Machine Learning and Next-Generation 5G/6G
+          Communication Technologies.
+        </p>
+        <div class="hero-tags">
+          <span>Wireless Communication</span>
+          <span>IoT System</span>
+          <span>5G/6G Networks</span>
+          <span>MIMO-NOMA Beamforming</span>
+          <span>Embedded Systems</span>
+          <span>LoRa Communication</span>
+          <span>Smart Healthcare</span>
+        </div>
+        <br>
+        <a class="btn primary" href="{{ data.personal.resume_link }}" target="_blank">Download CV</a>
+        <a class="btn primary" href="/contact">Contact</a>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <h2 class="title"><i class="fa-solid fa-user"></i> About Me</h2>
+      <div class="card about-card">
+        <p>
+          Hello! I am Sandip Karmakar, a Ph.D. scholar in Electronics and Communication Engineering at Jadavpur
+          University, Kolkata.
+          My expertise lies in the Internet of Things (IoT), wireless communication, embedded systems, and machine
+          learning, with a focus on healthcare monitoring solutions. Currently, as a Junior Research Fellow, I am
+          developing IoT-based prototypes using Raspberry Pi, LoRa, and related technologies for remote biosignal
+          acquisition and real-time health monitoring. My research also explores Massive MIMO and RIS-assisted NOMA IoT
+          networks for 5G and beyond.
+          Previously, I worked as a Lecturer at Salbani Institute of Technology, where I taught electronics courses and
+          managed computer laboratories. I have published research papers on IoT-based healthcare systems, smart
+          parking, and secure electronic voting machines.
+          Proficient in Python, C, machine learning, and embedded platforms, I am passionate about developing practical,
+          intelligent solutions that create a positive real-world impact.
+          Fluent in Bengali, English, and Hindi, I enjoy painting, swimming, and bike riding in my free time.
+        </p>
+      </div>
+    </section>
+
+    <!-- RECENT UPDATES (Dynamic – last 1 year from SQL) -->
+    <section class="section about-panel">
+      <h2 class="title"><i class="fa-solid fa-bullhorn"></i> Recent Updates</h2>
+
+      {% if data.recent_updates %}
+      <div class="grid">
+        {% for upd in data.recent_updates %}
+        <div class="card update-card">
+          <div class="update-top">
+            {% set st = (upd.status or '')|lower %}
+            {% if st in ['published', 'qualified', 'accepted'] %}
+            <span class="status status-published">{{ upd.status }}</span>
+            {% else %}
+            <span class="status status-review">{{ upd.status or 'Update' }}</span>
+            {% endif %}
+
+            <span class="update-date">
+              {% if upd.start and upd.end and upd.start != upd.end %}
+              {{ upd.start }} – {{ upd.end }}
+              {% elif upd.start %}
+              {{ upd.start }}
+              {% elif upd.end %}
+              {{ upd.end }}
+              {% endif %}
+            </span>
+          </div>
+
+          <h3>
+            <i class="fa-solid {{ upd.icon or 'fa-award' }}"></i>
+            {{ upd.title }}
+          </h3>
+
+          <p class="update-text">{{ upd.description }}</p>
+
+          <div class="update-meta">
+            {% if upd.organization %}
+            <p><i class="fa-solid fa-building-columns"></i> {{ upd.organization }}</p>
+            {% endif %}
+            {% if upd.location %}
+            <p><i class="fa-solid fa-location-dot"></i> {{ upd.location }}</p>
+            {% endif %}
+          </div>
+
+          {% if upd.link and upd.link != 'TBA' %}
+          <a class="update-link" href="{{ upd.link }}" target="_blank">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Details
+          </a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p style="color:#64748b;">No recent updates in the last year.</p>
+      {% endif %}
+    </section>
+
+    <!-- KNOWN LANGUAGE -->
+    <section class="section about-panel">
+      <h2 class="title">
+        <i class="fa-solid fa-language"></i> Known Language
+      </h2>
+
+      <div class="grid">
+        {% for lang in data.languages %}
+        <div class="card update-card">
+          <h3>
+            <i class="fa-solid fa-globe"></i> {{ lang.name }}
+          </h3>
+          <div class="update-meta">{{ lang.level }}</div>
+
+          <div class="lang-skills">
+            <span class="badge badge-blue">
+              <i class="fa-solid fa-book-open"></i> {{ 'Yes' if lang.read else 'No' }}
+            </span>
+            <span class="badge badge-blue">
+              <i class="fa-solid fa-pen"></i> {{ 'Yes' if lang.write else 'No' }}
+            </span>
+            <span class="badge badge-blue">
+              <i class="fa-solid fa-microphone"></i> {{ 'Yes' if lang.speak else 'No' }}
+            </span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- HOBBIES -->
+    <section class="section about-panel">
+      <h2 class="title"><i class="fa-solid fa-palette"></i> Hobbies</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+        {% for hobby in data.hobbies %}
+        <div class="hero-tags">
+          <span>{{ hobby }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- LEFT -->
+      <div class="footer-left">
+        <div class="logo">
+          <img src="{{ data.personal.logo }}" alt="Sandip Karmakar Logo"
+            style="width: 120px; height: 50px; object-fit: contain; display: block;">
+        </div>
+        <h3>{{ data.personal.name }}</h3>
+        <strong>
+          <p>{{ data.personal.current_designation }}</p>
+          <p>{{ data.personal.current_department }}</p>
+          <p>{{ data.personal.current_organization }}</p>
+          <p>{{ data.personal.current_address }}</p>
+        </strong>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-right">
+        <h4><i class="fa-solid fa-address-book"></i> Contact</h4>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a
+            href="mailto:{{ data.personal.email1 }}">{{data.personal.email1
+            }}</a></p>
+        <p><b><i class="fa-solid fa-envelope"></i></b> <a href="mailto:{{ data.personal.email2 }}">{{
+            data.personal.email2 }}</a></p>
+        <p><b><i class="fa-solid fa-phone"></i></b> <a href="tel:{{ data.personal.phone2 }}"> {{ data.personal.phone2
+            }}</a></p>
+        </p>
+        <p><b><i class="fa-solid fa-location-dot"></i> {{ data.personal.home_add }}</b></p>
+        <div class="social-icons">
+          <a href="{{ data.personal.github }}" target="_blank" title="GitHub"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="18" alt="GitHub"></a>
+          <a href="{{ data.personal.linkedin }}" target="_blank" title="LinkedIn"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="18"
+              alt="LinkedIn"></a>
+          <a href="{{ data.personal.scholar }}" target="_blank" title="GoogleScholar"><img
+              src="static/images/googlescholar.svg" width="18" alt="GoogleScholar"></a>
+          <a href="{{ data.personal.orcid }}" target="_blank" title="ORCiD"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/orcid.svg" width="18" alt="ORCiD"></a>
+          <a href="{{ data.personal.researchgate }}" target="_blank" title="ResearchGate"><img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/researchgate.svg" width="18"
+              alt="ResearchGate"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ data.personal.name }} | Thank you for visiting</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+</body>
+<script src="static/js/main/script.js"></script>
+
+</html>
